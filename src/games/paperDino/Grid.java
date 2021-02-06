@@ -35,8 +35,8 @@ public class Grid {
 		int insertPositionX, insertPositionY;
 		for (int i = 0; i < pieces.length; i++) {
 			for (int j = 0; j < pieces[i].length; j++) {
-				insertPositionY = position[1] + i;
-				insertPositionX = position[0] + j;
+				insertPositionY = position[0] + i;
+				insertPositionX = position[1] + j;
 				this.cells[insertPositionY][insertPositionX].insertPiece(pieces[i][j]);
 			}
 		}
@@ -51,8 +51,8 @@ public class Grid {
 		int extractPositionX, extractPositionY;
 		for (int i = 0; i < pieces.length; i++) {
 			for (int j = 0; j < pieces[i].length; j++) {
-				extractPositionY = position[1] + i;
-				extractPositionX = position[0] + j;
+				extractPositionY = position[0] + i;
+				extractPositionX = position[1] + j;
 				this.cells[extractPositionY][extractPositionX].extractPiece(pieces[i][j]);
 			}
 		}

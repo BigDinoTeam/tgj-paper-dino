@@ -28,7 +28,7 @@ public class Piece {
 		int si1 = this.position[0];
 		int sj1 = this.position[1];
 		int si2 = si1 + sprite.getHeight() / size[0];
-		int sj2 = sj1 + sprite.getWidth() / size[0];
+		int sj2 = sj1 + sprite.getWidth() / size[1];
 		context.drawImage(sprite, dj1, di1, dj2, di2, sj1, si1, sj2, si2);
 	}
 

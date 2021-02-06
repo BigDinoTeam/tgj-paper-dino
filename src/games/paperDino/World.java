@@ -116,11 +116,11 @@ public class World extends BasicGameState {
 		this.player = new Player(this, new int[]{1, 7});
 
 		this.dynamicEntities.add(player); // Ajouter le joueur
-		this.dynamicEntities.add(new AI(this, new int[]{2, 1})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{8, 4})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{7, 3})); // Ajouter un dino IA
-
-		this.stationaryEntities.add(new Building(this,0, new int[] {6,0}));  // Ajouter une maison
+		this.dynamicEntities.add(new AI(this, new int[]{1, 2})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{4, 8})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{3, 7})); // Ajouter un dino IA
+		//
+		this.stationaryEntities.add(new Building(this,0, new int[] {0, 6}));  // Ajouter une maison
 
 	}
 

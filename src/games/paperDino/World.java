@@ -119,8 +119,11 @@ public class World extends BasicGameState {
 		this.dynamicEntities.add(new AI(this, new int[]{8, 4})); // Ajouter un dino IA
 		this.dynamicEntities.add(new AI(this, new int[]{7, 3})); // Ajouter un dino IA
 
-		this.stationaryEntities.add(new Building(0, new int[] {6,0}));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this,0, new int[] {6,0}));  // Ajouter une maison
 
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
 }

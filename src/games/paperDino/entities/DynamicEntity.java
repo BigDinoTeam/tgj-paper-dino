@@ -11,7 +11,7 @@ abstract public class DynamicEntity extends Entity {
 	private World world;
 
 	public DynamicEntity(World world, int[] position) {
-		super(position);
+		super(world, position);
 		this.world = world;
 	}
 

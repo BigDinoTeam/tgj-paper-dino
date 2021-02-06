@@ -11,6 +11,7 @@ class World {
 class Grid {
 	Cell[][] cells
 	render()
+	 insert(Piece[][] pieces, int[] position)
 }
 
 class Cell {
@@ -28,7 +29,7 @@ abstract class Entity {
 	static Image sprite
 	Piece[][] pieces
 	int[2] position
-	Entity(int[] position)
+	Entity(World world, int[] position)
 }
 
 package entities{
@@ -39,21 +40,21 @@ package entities{
 
 	package stationary {
 		class Nest extends StationaryEntity {
-			Nest(int[] position)
+			Nest(World world, int[] position)
 			float[] paperProbabilities
 		}
 
 		class Building extends StationaryEntity {
 			AI dino
 			int type // 0: House
-			Building(int type, int[] position)
+			Building(World world, int type, int[] position)
 		}
 	}
 
 
 	abstract class DynamicEntity extends Entity {
 		World world
-		DynamicEntity(World world)
+		DynamicEntity(World world, int[] position)
 		update()
 		move()
 	}

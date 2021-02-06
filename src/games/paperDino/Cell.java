@@ -12,4 +12,8 @@ public class Cell {
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {}
 
+	public void insertPiece(Piece piece){
+		this.pieces.add(piece);
+	}
+
 }

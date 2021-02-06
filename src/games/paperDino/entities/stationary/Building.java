@@ -13,7 +13,7 @@ public class Building extends StationaryEntity {
 	private static Image sprite;
 
 	static {
-		Building.sprite = AppLoader.loadPicture("/images/houses/main_cyan.png");
+		Building.sprite = AppLoader.loadPicture("/images/houses/maison_cyan.png");
 	}
 
 	private int type;

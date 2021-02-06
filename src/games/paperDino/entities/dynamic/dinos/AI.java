@@ -15,7 +15,7 @@ public class AI extends Dino {
 	private static Image sprite;
 
 	static {
-		AI.sprite = AppLoader.loadPicture("/images/houses/main_jaune.png");
+		AI.sprite = AppLoader.loadPicture("/images/houses/maison_jaune.png");
 	}
 
 	private Building building;

@@ -13,7 +13,7 @@ public class Player extends Dino {
 	private static Image sprite;
 
 	static {
-		Player.sprite = AppLoader.loadPicture("/images/houses/main_orange.png");
+		Player.sprite = AppLoader.loadPicture("/images/houses/maison_orange.png");
 	}
 
 	private int[] paperCounts;

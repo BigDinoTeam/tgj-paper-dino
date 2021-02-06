@@ -21,10 +21,10 @@ public class Piece {
 		int[] position = this.entity.getPosition();
 		int[] size = this.entity.getSize();
 		Image sprite = this.entity.getSprite();
-		int di1 = position[0];
-		int dj1 = position[1];
-		int di2 = di1 + 32;
-		int dj2 = dj1 + 32;
+		int di1 = position[0] * 128;
+		int dj1 = position[1] * 128;
+		int di2 = di1 + 128;
+		int dj2 = dj1 + 128;
 		int si1 = this.position[0];
 		int sj1 = this.position[1];
 		int si2 = si1 + sprite.getHeight() / size[0];

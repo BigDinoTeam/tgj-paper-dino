@@ -1,0 +1,93 @@
+@startuml
+
+class World {
+	static Color[] colors
+	List<DynamicEntity> dynamicEntities
+	update()
+	render()
+}
+
+class Grid {
+	Cell[][] cells
+	render()
+}
+
+class Cell {
+	List<Piece> pieces
+	render()
+}
+
+class Piece {
+	Entity entity
+	boolean walkable
+	render()
+}
+
+class Entity {
+	static Image sprite
+	Piece[][] pieces
+	int[2] position
+	Entity(World world)
+}
+
+class Nest extends Entity {
+	float[] paperProbabilities
+}
+
+class Building extends Entity {
+	int type // 0: House
+	AI dino
+}
+
+class DynamicEntity extends Entity {
+	World world
+	update()
+	move()
+}
+
+class Dino extends DynamicEntity
+
+class AI extends Dino {
+	enum SpeciesColor color
+	enum Activity activity
+	Building building
+}
+
+class Player extends Dino {
+	int[] paperCounts
+	int[] paperMaxCounts
+	enum SpeciesColor selectedPaper
+	collectPapers()
+	selectPaperColor()
+	throwPaper()
+	punchWithPaper()
+}
+
+class Paper extends DynamicEntity {
+	enum SpeciesColor color
+	float[2] speed
+}
+
+enum Activity {
+	wandering
+	resting
+	hangry
+}
+
+enum SpeciesColor {
+	red
+	blue
+}
+
+World "0"--down"1" Grid
+World "1"--down"*" DynamicEntity
+Grid "0"--down"*" Cell
+Cell "0"--right"*" Piece
+Piece "+"--right"1" Entity
+Building "1"--"1" AI
+AI -- Activity
+AI -- SpeciesColor
+Player -- SpeciesColor
+Paper -- SpeciesColor
+
+@enduml

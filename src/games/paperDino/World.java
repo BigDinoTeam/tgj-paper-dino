@@ -21,11 +21,11 @@ public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
-	private Grid grid;
 
 	private List<DynamicEntity> dynamicEntities;
 	private List<StationaryEntity> stationaryEntities;
 	private Player player;
+	private Grid grid;
 
 	public World(int ID) {
 		this.ID = ID;
@@ -40,7 +40,6 @@ public class World extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au chargement du programme */
-		loadLevel();
 	}
 
 	@Override
@@ -77,10 +76,12 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
+		this.grid.render(container, game, context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au début du jeu */
+		loadLevel();
 	}
 
 	public void pause(GameContainer container, StateBasedGame game) {

@@ -18,6 +18,12 @@ public class Grid {
 		}
 	}
 
-	public void render(GameContainer container, StateBasedGame game, Graphics context) {}
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		for (Cell[] line: this.cells) {
+			for (Cell cell: line) {
+				cell.render(container, game, context);
+			}
+		}
+	}
 
 }

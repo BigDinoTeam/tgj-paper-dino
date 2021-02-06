@@ -1,5 +1,6 @@
 package games.paperDino;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -10,6 +11,14 @@ public class Cell {
 
 	private List<Piece> pieces;
 
-	public void render(GameContainer container, StateBasedGame game, Graphics context) {}
+	public Cell() {
+		this.pieces = new ArrayList<Piece>();
+	}
+
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		for (Piece piece: this.pieces) {
+			piece.render(container, game, context);
+		}
+	}
 
 }

@@ -21,7 +21,17 @@ public class Cell {
 		}
 	}
 
-	public void insertPiece(Piece piece){
+	public void insertPiece(Piece piece) {
+		Entity entity = piece.getEntity();
+		int position = entity.getPosition()[0] + entity.getSize()[1];
+		for (int k = 0, lk = this.pieces.size(); k < lk; ++k) {
+			Entity otherEntity = this.pieces.get(k).getEntity();
+			int otherPosition = otherEntity.getPosition()[0] + otherEntity.getSize()[0];
+			if (otherPosition > position) {
+				this.pieces.add(k, piece);
+				break;
+			}
+		}
 		this.pieces.add(piece);
 	}
 

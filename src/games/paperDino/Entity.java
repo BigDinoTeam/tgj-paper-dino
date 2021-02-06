@@ -6,11 +6,13 @@ import org.newdawn.slick.state.StateBasedGame;
 
 abstract public class Entity {
 
+	private World world;
 	private Image sprite;
 	private Piece[][] pieces;
 	private int[] position;
 
-	public Entity(Image sprite, int[] position) {
+	public Entity(World world, Image sprite, int[] position) {
+		this.world = world;
 		this.sprite = sprite;
 		this.position = position;
 		this.pieces = new Piece[0][0];
@@ -24,6 +26,7 @@ abstract public class Entity {
 
 	public void setPieces(Piece[][] pieces) {
 		this.pieces = pieces;
+		this.world.getGrid().insert(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
 	}
 
 	public Piece[][] getPieces() {

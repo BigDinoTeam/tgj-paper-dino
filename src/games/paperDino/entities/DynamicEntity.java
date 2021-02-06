@@ -10,11 +10,8 @@ import games.paperDino.World;
 
 abstract public class DynamicEntity extends Entity {
 
-	private World world;
-
 	public DynamicEntity(World world, Image sprite, int[] position) {
-		super(sprite, position);
-		this.world = world;
+		super(world, sprite, position);
 		this.setPieces(new Piece[][]{
 			new Piece[]{
 				new Piece(this, new int[]{0, 0}, false),

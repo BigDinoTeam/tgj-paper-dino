@@ -21,4 +21,8 @@ public class Cell {
 		}
 	}
 
+	public void insertPiece(Piece piece){
+		this.pieces.add(piece);
+	}
+
 }

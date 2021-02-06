@@ -23,7 +23,7 @@ public class Choice extends AppMenu {
 		this.setTitle("Choix");
 		this.setSubtitle("Sans sous-titre");
 		this.setMenu(Arrays.asList(new MenuItem[] {
-			new MenuItem("Test") {
+			new MenuItem("Paper Dino") {
 				public void itemSelected() {
 					game.enterState(3, new FadeOutTransition(), new FadeInTransition());
 				}

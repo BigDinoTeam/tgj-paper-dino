@@ -1,4 +1,4 @@
-package games.test;
+package games.paperDino;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

@@ -14,7 +14,7 @@ import app.AppLoader;
 public final class Main {
 
 	public static final void main(String[] arguments) throws SlickException {
-		String title = "Sans titre";
+		String title = "Paper Dino";
 		int width = 1280;
 		int height = 720;
 		boolean fullscreen = false;
@@ -52,7 +52,7 @@ public final class Main {
 				this.addState(new pages.Welcome(0));
 				this.addState(new pages.Choice(1));
 				this.addState(new pages.Pause(2));
-				this.addState(new games.test.World(3));
+				this.addState(new games.paperDino.World(3));
 			}
 
 		};

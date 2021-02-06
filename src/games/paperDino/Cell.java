@@ -25,4 +25,8 @@ public class Cell {
 		this.pieces.add(piece);
 	}
 
+	public void extractPiece(Piece piece){
+		this.pieces.remove(piece);
+	}
+
 }

@@ -29,44 +29,51 @@ abstract class Entity {
 	int[2] position
 }
 
-class Nest extends Entity {
-	float[] paperProbabilities
-}
+package entities{
 
-class Building extends Entity {
-	AI dino
-	int type // 0: House
-}
+	class Nest extends Entity {
+		float[] paperProbabilities
+	}
 
-abstract class DynamicEntity extends Entity {
-	World world
-	DynamicEntity(World world)
-	update()
-	move()
-}
+	class Building extends Entity {
+		AI dino
+		int type // 0: House
+	}
 
-class Dino extends DynamicEntity
+	abstract class DynamicEntity extends Entity {
+		World world
+		DynamicEntity(World world)
+		update()
+		move()
+	}
 
-class AI extends Dino {
-	Building building
-	SpeciesColor color
-	Activity activity
-	boolean pacified
-}
+	package dynamic{
+		class Dino extends DynamicEntity
 
-class Player extends Dino {
-	int[] paperCounts
-	int[] paperMaxCounts
-	SpeciesColor selectedPaper
-	collectPapers()
-	selectPaper()
-	throwPaper()
-	punchWithPaper()
-}
+		class Paper extends DynamicEntity {
+			SpeciesColor color
+			float[2] speed
+		}
 
-class Paper extends DynamicEntity {
-	SpeciesColor color
-	float[2] speed
+		package dinos{
+			class AI extends Dino {
+				Building building
+				SpeciesColor color
+				Activity activity
+				boolean pacified
+			}
+
+			class Player extends Dino {
+				int[] paperCounts
+				int[] paperMaxCounts
+				SpeciesColor selectedPaper
+				collectPapers()
+				selectPaper()
+				throwPaper()
+				punchWithPaper()
+			}
+		}
+	}
 }
 
 enum Activity {

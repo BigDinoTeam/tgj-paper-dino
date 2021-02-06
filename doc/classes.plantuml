@@ -1,8 +1,8 @@
 @startuml
 
 class World {
-	static Color[] colors
 	List<DynamicEntity> dynamicEntities
+	Player player
 	update()
 	render()
 }
@@ -23,11 +23,10 @@ class Piece {
 	render()
 }
 
-class Entity {
+abstract class Entity {
 	static Image sprite
 	Piece[][] pieces
 	int[2] position
-	Entity(World world)
 }
 
 class Nest extends Entity {
@@ -35,12 +34,13 @@ class Nest extends Entity {
 }
 
 class Building extends Entity {
-	int type // 0: House
 	AI dino
+	int type // 0: House
 }
 
-class DynamicEntity extends Entity {
+abstract class DynamicEntity extends Entity {
 	World world
+	DynamicEntity(World world)
 	update()
 	move()
 }
@@ -48,23 +48,24 @@ class DynamicEntity extends Entity {
 class Dino extends DynamicEntity
 
 class AI extends Dino {
-	enum SpeciesColor color
-	enum Activity activity
 	Building building
+	SpeciesColor color
+	Activity activity
+	boolean pacified
 }
 
 class Player extends Dino {
 	int[] paperCounts
 	int[] paperMaxCounts
-	enum SpeciesColor selectedPaper
+	SpeciesColor selectedPaper
 	collectPapers()
-	selectPaperColor()
+	selectPaper()
 	throwPaper()
 	punchWithPaper()
 }
 
 class Paper extends DynamicEntity {
-	enum SpeciesColor color
+	SpeciesColor color
 	float[2] speed
 }
 
@@ -81,6 +82,7 @@ enum SpeciesColor {
 
 World "0"--down"1" Grid
 World "1"--down"*" DynamicEntity
+World "0"--"1" Player
 Grid "0"--down"*" Cell
 Cell "0"--right"*" Piece
 Piece "+"--right"1" Entity

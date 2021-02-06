@@ -1,5 +1,7 @@
 package games.paperDino;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -8,10 +10,16 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import games.paperDino.entities.DynamicEntity;
+import games.paperDino.entities.dynamic.dinos.Player;
+
 public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
+
+	private List<DynamicEntity> dynamicEntities;
+	private Player player;
 
 	public World(int ID) {
 		this.ID = ID;

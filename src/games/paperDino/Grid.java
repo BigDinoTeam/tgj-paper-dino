@@ -21,7 +21,7 @@ public class Grid {
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {}
 
 	/**
-	 * Insert les pièces dans les cellules de la grille
+	 * Insère les pièces dans les cellules de la grille
 	 * @param pieces tableau 2D des pièces à insérer
 	 * @param position coordonnées (x, y) de la pièce en haut à droite
 	 */
@@ -32,6 +32,22 @@ public class Grid {
 				insertPositionY = position[1] + i;
 				insertPositionX = position[0] + j;
 				this.cells[insertPositionY][insertPositionX].insertPiece(pieces[i][j]);
+			}
+		}
+	}
+
+	/**
+	 * Retirer les pièces des les cellules de la grille
+	 * @param pieces tableau 2D des pièces à retirer
+	 * @param position coordonnées (x, y) de la pièce en haut à droite
+	 */
+	public void extract(Piece[][] pieces, int[] position){
+		int extractPositionX, extractPositionY;
+		for (int i = 0; i < pieces.length; i++) {
+			for (int j = 0; j < pieces[i].length; j++) {
+				extractPositionY = position[1] + i;
+				extractPositionX = position[0] + j;
+				this.cells[extractPositionY][extractPositionX].extractPiece(pieces[i][j]);
 			}
 		}
 	}

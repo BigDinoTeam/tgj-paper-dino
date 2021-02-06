@@ -5,8 +5,8 @@ import games.paperDino.entities.DynamicEntity;
 
 abstract public class Dino extends DynamicEntity {
 
-	public Dino(World world) {
-		super(world);
+	public Dino(World world, int[] position) {
+		super(world, position);
 	}
 
 }

@@ -10,7 +10,10 @@ abstract public class DynamicEntity extends Entity {
 
 	private World world;
 
-	public DynamicEntity(World world) {}
+	public DynamicEntity(World world, int[] position) {
+		super(position);
+		this.world = world;
+	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {}
 

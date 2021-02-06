@@ -3,7 +3,7 @@ package games.paperDino.entities.dynamic.dinos;
 import games.paperDino.Activity;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
-import games.paperDino.entities.Building;
+import games.paperDino.entities.stationary.Building;
 import games.paperDino.entities.dynamic.Dino;
 
 public class AI extends Dino {
@@ -13,8 +13,8 @@ public class AI extends Dino {
 	private Activity activity;
 	private boolean pacified;
 
-	public AI(World world) {
-		super(world);
+	public AI(World world, int[] position) {
+		super(world, position);
 	}
 
 }

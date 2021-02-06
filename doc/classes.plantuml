@@ -2,6 +2,7 @@
 
 class World {
 	List<DynamicEntity> dynamicEntities
+	List<StationaryEntity> stationaryEntities
 	Player player
 	update()
 	render()
@@ -27,18 +28,28 @@ abstract class Entity {
 	static Image sprite
 	Piece[][] pieces
 	int[2] position
+	Entity(int[] position)
 }
 
 package entities{
 
-	class Nest extends Entity {
-		float[] paperProbabilities
+	abstract class StationaryEntity extends Entity{
+		StationaryEntity(int[] position)
 	}
 
-	class Building extends Entity {
-		AI dino
-		int type // 0: House
+	package stationary {
+		class Nest extends StationaryEntity {
+			Nest(int[] position)
+			float[] paperProbabilities
+		}
+
+		class Building extends StationaryEntity {
+			AI dino
+			int type // 0: House
+			Building(int type, int[] position)
+		}
 	}
+
 
 	abstract class DynamicEntity extends Entity {
 		World world
@@ -48,11 +59,14 @@ package entities{
 	}
 
 	package dynamic{
-		class Dino extends DynamicEntity
+		class Dino extends DynamicEntity{
+			Dino(World world, int[] position)
+		}
 
 		class Paper extends DynamicEntity {
 			SpeciesColor color
 			float[2] speed
+			Paper(World world, int[] position)
 		}
 
 		package dinos{
@@ -61,6 +75,7 @@ package entities{
 				SpeciesColor color
 				Activity activity
 				boolean pacified
+				AI(World world, int[] position)
 			}
 
 			class Player extends Dino {
@@ -71,6 +86,7 @@ package entities{
 				selectPaper()
 				throwPaper()
 				punchWithPaper()
+				Player(World world, int[] position)
 			}
 		}
 	}
@@ -89,6 +105,7 @@ enum SpeciesColor {
 
 World "0"--down"1" Grid
 World "1"--down"*" DynamicEntity
+World "1"--down"*" StationaryEntity
 World "0"--"1" Player
 Grid "0"--down"*" Cell
 Cell "0"--right"*" Piece

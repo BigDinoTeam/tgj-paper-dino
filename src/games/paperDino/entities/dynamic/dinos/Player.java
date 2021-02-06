@@ -10,8 +10,8 @@ public class Player extends Dino {
 	private int[] paperMaCounts;
 	private SpeciesColor selectedPaper;
 
-	public Player(World world) {
-		super(world);
+	public Player(World world, int[] position) {
+		super(world, position);
 	}
 
 	public void collectPapers() {}

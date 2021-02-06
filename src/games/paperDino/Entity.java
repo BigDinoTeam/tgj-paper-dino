@@ -10,6 +10,10 @@ abstract public class Entity {
 	private Piece[][] pieces;
 	private int[] position;
 
+	public Entity(int[] position) {
+		this.position = position;
+	}
+
 	public void update(GameContainer container, StateBasedGame game, int delta) {}
 
 }

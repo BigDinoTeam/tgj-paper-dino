@@ -1,7 +1,11 @@
 package games.paperDino;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import games.paperDino.entities.StationaryEntity;
+import games.paperDino.entities.dynamic.dinos.AI;
+import games.paperDino.entities.stationary.Building;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -17,8 +21,10 @@ public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
+	private Grid grid;
 
 	private List<DynamicEntity> dynamicEntities;
+	private List<StationaryEntity> stationaryEntities;
 	private Player player;
 
 	public World(int ID) {
@@ -34,6 +40,7 @@ public class World extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au chargement du programme */
+		loadLevel();
 	}
 
 	@Override
@@ -94,6 +101,26 @@ public class World extends BasicGameState {
 
 	public int getState() {
 		return this.state;
+	}
+
+	/**
+	 * Charge la Grid et les entitées dynamiques
+	 */
+	public void loadLevel(){
+		this.grid = new Grid(7,9); // Initialisation manuelle de la grid
+
+		this.dynamicEntities = new ArrayList<>();
+		this.stationaryEntities = new ArrayList<>();
+
+		this.player = new Player(this, new int[]{1, 7});
+
+		this.dynamicEntities.add(player); // Ajouter le joueur
+		this.dynamicEntities.add(new AI(this, new int[]{2, 1})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{8, 4})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{7, 3})); // Ajouter un dino IA
+
+		this.stationaryEntities.add(new Building(0, new int[] {6,0}));  // Ajouter une maison
+
 	}
 
 }

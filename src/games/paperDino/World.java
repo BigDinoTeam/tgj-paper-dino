@@ -25,16 +25,10 @@ public class World extends BasicGameState {
 
 	private static Image background;
 	private static Image gui;
-	private static Image nightBackground;
-	private static Image diplo;
-	private static Image tyra;
 
 	static {
 		World.background = AppLoader.loadPicture("/images/herbe.png");
 		World.gui = AppLoader.loadPicture("/images/GUI.png");
-		World.nightBackground = AppLoader.loadPicture("/images/night.png");
-		World.diplo = AppLoader.loadPicture("/images/diplo.png");
-		World.tyra = AppLoader.loadPicture("/images/tyra.png");
 	}
 
 	private int ID;
@@ -44,10 +38,8 @@ public class World extends BasicGameState {
 	private List<StationaryEntity> stationaryEntities;
 	private Player player;
 	private Grid grid;
-	
+	private Night night;
 	private boolean isDay;
-	private int lives;
-	private int goal; //TODO progressif
 
 	public World(int ID) {
 		this.ID = ID;
@@ -107,6 +99,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
+		
 		if (isDay) {
 			context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 			this.grid.render(container, game, context);
@@ -115,14 +108,12 @@ public class World extends BasicGameState {
 			this.player.render(container, game, context);
 			context.drawImage(World.gui, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.gui.getWidth(), World.gui.getHeight());
 		} else {
-			this.renderNightScreen(container, game, context);
+			night.render(container, game, context);
 		}
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au début du jeu */
-		this.lives = 5;
-		this.goal = 10;
 		loadLevel();
 	}
 
@@ -180,25 +171,13 @@ public class World extends BasicGameState {
 		this.dynamicEntities.remove(entity);
 	}
 
-	public void renderNightScreen(GameContainer container, StateBasedGame game, Graphics context) {
-		context.drawImage(World.nightBackground, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.nightBackground.getWidth(), World.nightBackground.getHeight());
-		
-		if (this.player.getScore() < this.goal) {
-			lives--;
-			context.drawImage(tyra, (int)(Math.random()*(container.getWidth()-tyra.getWidth())), (int)(container.getHeight()/2+Math.random()*(container.getHeight()/2)));
-		}
-		
-		for (int i=0; i<lives; i++) {
-			context.drawImage(diplo, (int)(Math.random()*(container.getWidth()-diplo.getWidth())), (int)(container.getHeight()/2+Math.random()*(container.getHeight()/2)));
-		}
-	}
-
 	public Player getPlayer() {
 		return this.player;
 	}
 
 	public void killPlayer(){
 		this.isDay = false;
+		this.night = new Night(this.player.getScore(), true);
 		System.out.println("Collision avec le joueur ! Day over");
 	}
 }

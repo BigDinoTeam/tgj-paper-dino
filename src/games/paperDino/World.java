@@ -136,7 +136,6 @@ public class World extends BasicGameState {
 
 		this.stationaryEntities.add(new Nest(this, new int[]{4, 0})); // Ajouter le fourgon
 		this.stationaryEntities.add(new Building(this,0, new int[] {1, 6}));  // Ajouter une maison
-
 	}
 
 	public Grid getGrid() {
@@ -149,6 +148,10 @@ public class World extends BasicGameState {
 
 	public void removeDynamicEntity(DynamicEntity entity) {
 		this.dynamicEntities.remove(entity);
+	}
+
+	public Player getPlayer() {
+		return this.player;
 	}
 
 }

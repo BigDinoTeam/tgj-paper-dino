@@ -1,11 +1,15 @@
 package games.paperDino.entities.dynamic.dinos;
 
-import games.paperDino.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 
 import app.AppLoader;
 
+import games.paperDino.Activity;
+import games.paperDino.Grid;
+import games.paperDino.Piece;
+import games.paperDino.SpeciesColor;
+import games.paperDino.World;
 import games.paperDino.entities.stationary.Building;
 import games.paperDino.entities.dynamic.Dino;
 
@@ -34,7 +38,11 @@ public class AI extends Dino {
 
 	public AI(World world, int[] position) {
 		super(world, AI.sprite, position);
-
+		this.setPieces(new Piece[][]{
+			new Piece[]{
+				new Piece(this, new int[]{0, 0}, false),
+			},
+		});
 		// Variables de zone de patrouille :
 		this.latestMove = new int[] {-1, 0};
 		this.initialPosition = position;
@@ -83,4 +91,9 @@ public class AI extends Dino {
 	private int[] addVectorToPoint(int[] point, int[] vector){
 		return new int[] {point[0] + vector[0], point[1] + vector[1]};
 	}
+
+	public SpeciesColor getColor() {
+		return this.color;
+	}
+
 }

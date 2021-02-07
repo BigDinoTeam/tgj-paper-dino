@@ -35,5 +35,10 @@ public class Building extends StationaryEntity {
 				new Piece(this, new int[]{1, 2}, false),
 			},
 		});
+		this.dino = new AI(world, position);
+	}
+
+	public AI getDino() {
+		return this.dino;
 	}
 }

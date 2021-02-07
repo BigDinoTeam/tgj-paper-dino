@@ -11,15 +11,21 @@ abstract public class Entity {
 	private Image sprite;
 	private Piece[][] pieces;
 	private int[] position;
+	private float[] translation;
 
 	public Entity(World world, Image sprite, int[] position) {
 		this.world = world;
 		this.sprite = sprite;
 		this.position = position;
+		this.translation = new float[2];
 		this.pieces = new Piece[0][0];
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {}
+
+	public World getWorld() {
+		return this.world;
+	}
 
 	public Image getSprite() {
 		return this.sprite;
@@ -34,14 +40,14 @@ abstract public class Entity {
 		return this.pieces;
 	}
 
+	public void setPosition(int[] position) {
+		this.position = position;
+	}
+
 	public int[] getPosition() {
 		int i = this.position[0];
 		int j = this.position[1];
 		return new int[]{i, j};
-	}
-
-	public void setPosition(int[] position) {
-		this.position = position;
 	}
 
 	public int[] getSize() {
@@ -50,8 +56,14 @@ abstract public class Entity {
 		return new int[]{li, lj};
 	}
 
-	public World getWorld() {
-		return world;
+	public void setTranslation(float[] translation) {
+		this.translation = translation;
+	}
+
+	public float[] getTranslation() {
+		float i = this.translation[0];
+		float j = this.translation[1];
+		return new float[]{i, j};
 	}
 
 }

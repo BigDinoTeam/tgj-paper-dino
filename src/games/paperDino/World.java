@@ -81,9 +81,8 @@ public class World extends BasicGameState {
 			this.setState(1);
 			game.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
-
-		for (DynamicEntity dynamicEntity : dynamicEntities) {
-			dynamicEntity.update(container,game,delta);
+		for (int k = this.dynamicEntities.size() - 1; k >= 0; --k) {
+			this.dynamicEntities.get(k).update(container, game, delta);
 		}
 	}
 
@@ -143,4 +142,9 @@ public class World extends BasicGameState {
 	public Grid getGrid() {
 		return grid;
 	}
+
+	public void addDynamicEntity(DynamicEntity entity) {
+		this.dynamicEntities.add(entity);
+	}
+
 }

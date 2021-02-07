@@ -29,11 +29,33 @@ public class Building extends StationaryEntity {
 				new Piece(this, new int[]{0, 0}, true),
 				new Piece(this, new int[]{0, 1}, true),
 				new Piece(this, new int[]{0, 2}, true),
+				new Piece(this, new int[]{0, 0}, true),
+				new Piece(this, new int[]{0, 1}, true),
+				new Piece(this, new int[]{0, 2}, true),
 			},
 			new Piece[]{
 				new Piece(this, new int[]{1, 0}, false),
 				new Piece(this, new int[]{1, 1}, false),
 				new Piece(this, new int[]{1, 2}, false),
+				new Piece(this, new int[]{1, 0}, false),
+				new Piece(this, new int[]{1, 1}, false),
+				new Piece(this, new int[]{1, 2}, false),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{2, 0}, false),
+				new Piece(this, new int[]{2, 1}, false),
+				new Piece(this, new int[]{2, 2}, false),
+				new Piece(this, new int[]{2, 0}, false),
+				new Piece(this, new int[]{2, 1}, false),
+				new Piece(this, new int[]{2, 2}, false),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{3, 0}, false),
+				new Piece(this, new int[]{3, 1}, false),
+				new Piece(this, new int[]{3, 2}, false),
+				new Piece(this, new int[]{3, 0}, false),
+				new Piece(this, new int[]{3, 1}, false),
+				new Piece(this, new int[]{3, 2}, false),
 			},
 		});
 		this.color = color;

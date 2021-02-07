@@ -25,7 +25,7 @@ public class Piece {
 		Image sprite = this.entity.getSprite();
 		int clipHeight = sprite.getHeight() / size[0];
 		int clipWidth = sprite.getWidth() / size[1];
-		int cellSize = 128;
+		int cellSize = Cell.size;
 		float di = this.position[0] + position[0] + translation[0];
 		float dj = this.position[1] + position[1] + translation[1];
 		int si = this.position[0];

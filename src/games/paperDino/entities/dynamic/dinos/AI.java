@@ -41,6 +41,11 @@ public class AI extends Dino {
 		this.setPieces(new Piece[][]{
 			new Piece[]{
 				new Piece(this, new int[]{0, 0}, false),
+				new Piece(this, new int[]{0, 1}, false),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{1, 0}, false),
+				new Piece(this, new int[]{1, 1}, false),
 			},
 		});
 		this.color = color;

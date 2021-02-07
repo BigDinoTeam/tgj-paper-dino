@@ -53,20 +53,6 @@ public class Cell {
 		return true;
 	}
 
-	/**
-	 * @return S'il est possible de marcher sur la cellule. Il suffit d'une piece non walkable pour rendre une cellule non walkable.
-	 */
-	public boolean isWalkable(Dino dino){
-		for (Piece piece : this.pieces) {
-			if (!piece.isWalkable()){
-				if(piece.getEntity() instanceof StationaryEntity || piece.getEntity().getClass().equals(dino.getClass())){ // Si l'obstacle est statique ou de même type que le dino voulant faire le déplacement, on ne peut pas marcher dessus
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
 	public List<Piece> getPieces() {
 		return this.pieces;
 	}

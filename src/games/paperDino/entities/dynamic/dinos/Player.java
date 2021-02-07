@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import app.AppFont;
 import app.AppLoader;
 
+import games.paperDino.Piece;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.dynamic.Dino;
@@ -27,9 +28,15 @@ public class Player extends Dino {
 	private int[] paperCounts;
 	private int[] paperMaxCounts;
 	private SpeciesColor color;
+	private int score;
 
 	public Player(World world, int[] position) {
 		super(world, Player.sprite, position);
+		this.setPieces(new Piece[][]{
+			new Piece[]{
+				new Piece(this, new int[]{0, 0}, true),
+			},
+		});
 		this.paperCounts = new int[]{
 			2, // universal
 			5, // red
@@ -45,6 +52,7 @@ public class Player extends Dino {
 			10, // blue
 		};
 		this.color = SpeciesColor.universal;
+		this.score = 0;
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -61,6 +69,21 @@ public class Player extends Dino {
 		}
 	}
 
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38*container.getHeight()/1080);
+		
+		context.setColor(Color.black);
+		context.fillRect(640*container.getWidth()/1920, 925*container.getHeight()/1080, (1300-640)*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		context.setColor(Color.white);
+		context.fillRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		
+		for (int i=0; i<paperCounts.length ; i++) {
+			context.setColor(paperCounts[i]==paperMaxCounts[i]?Color.red:(i==color.ordinal()?Color.black:Color.white));
+			context.setFont(playerFont);
+			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
+		}
+	}
+	
 	public void collectPapers() {}
 
 	public void selectPaper() {}
@@ -98,21 +121,13 @@ public class Player extends Dino {
 		}
 
 	}
+		
+	public void setScore(int score) {
+		this.score = score;
+	}
 
-	public void render(GameContainer container, StateBasedGame game, Graphics context) {
-		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38*container.getHeight()/1080);
-		
-		context.setColor(Color.black);
-		context.fillRect(640*container.getWidth()/1920, 925*container.getHeight()/1080, (1300-640)*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
-		context.setColor(Color.white);
-		context.fillRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
-		
-		for (int i=0; i<paperCounts.length ; i++) {
-			context.setColor(paperCounts[i]==paperMaxCounts[i]?Color.red:(i==color.ordinal()?Color.black:Color.white));
-			context.setFont(playerFont);
-			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
-		}
-		
+	public int getScore() {
+		return this.score;
 	}
 
 }

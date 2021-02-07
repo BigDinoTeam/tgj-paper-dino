@@ -1,5 +1,6 @@
 package games.paperDino.entities.dynamic;
 
+import games.paperDino.entities.stationary.Building;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -15,6 +16,7 @@ import games.paperDino.Piece;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.DynamicEntity;
+import games.paperDino.entities.dynamic.dinos.AI;
 import games.paperDino.entities.dynamic.dinos.Player;
 
 public class Paper extends DynamicEntity {
@@ -62,9 +64,24 @@ public class Paper extends DynamicEntity {
 		for (Piece piece: cellPieces) {
 			Entity entity = piece.getEntity();
 			if (!piece.isWalkable() && !(entity instanceof Player)) {
-				// TODO: collision
 				this.setPieces(null);
 				world.removeDynamicEntity(this);
+				if (entity instanceof Building) {
+					AI dino = ((Building) entity).getDino();
+					Player player = world.getPlayer();
+					if (this.color == dino.getColor()) {
+						player.setScore(player.getScore() + 1);
+					}
+					return;
+				}
+				if (entity instanceof AI) {
+					AI dino = (AI) entity;
+					Player player = world.getPlayer();
+					if (this.color == dino.getColor()) {
+						player.setScore(player.getScore() + 1);
+					}
+					return;
+				}
 				return;
 			}
 		}

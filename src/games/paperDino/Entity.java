@@ -32,8 +32,13 @@ abstract public class Entity {
 	}
 
 	public void setPieces(Piece[][] pieces) {
+		if (this.pieces != null) {
+			this.world.getGrid().extract(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
+		}
 		this.pieces = pieces;
-		this.world.getGrid().insert(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
+		if (pieces != null) {
+			this.world.getGrid().insert(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
+		}
 	}
 
 	public Piece[][] getPieces() {
@@ -41,7 +46,13 @@ abstract public class Entity {
 	}
 
 	public void setPosition(int[] position) {
+		if (this.position != null) {
+			this.world.getGrid().extract(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
+		}
 		this.position = position;
+		if (pieces != null) {
+			this.world.getGrid().insert(this.pieces, this.position); // Insère les pièces de l'entité dans la grille
+		}
 	}
 
 	public int[] getPosition() {

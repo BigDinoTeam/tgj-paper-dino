@@ -1,16 +1,21 @@
 package games.paperDino.entities.dynamic;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
 
 import app.AppLoader;
 
+import games.paperDino.Cell;
+import games.paperDino.Entity;
 import games.paperDino.Grid;
 import games.paperDino.Piece;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.DynamicEntity;
+import games.paperDino.entities.dynamic.dinos.Player;
 
 public class Paper extends DynamicEntity {
 
@@ -36,6 +41,11 @@ public class Paper extends DynamicEntity {
 
 	public Paper(World world, SpeciesColor color, int[] initialPosition, int[] finalPosition) {
 		super(world, Paper.sprites[color.ordinal()], initialPosition);
+		this.setPieces(new Piece[][]{
+			new Piece[]{
+				new Piece(this, new int[]{0, 0}, true),
+			},
+		});
 		this.color = color;
 		this.initialPosition = initialPosition;
 		this.finalPosition = finalPosition;
@@ -44,9 +54,26 @@ public class Paper extends DynamicEntity {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
-		this.countdown -= delta;
-		if (this.countdown <= 0) {
+		int[] oldPosition = this.getPosition();
+		World world = this.getWorld();
+		Grid grid = world.getGrid();
+		Cell cell = grid.getCells()[oldPosition[0]][oldPosition[1]];
+		List<Piece> cellPieces = cell.getPieces();
+		for (Piece piece: cellPieces) {
+			Entity entity = piece.getEntity();
+			if (!piece.isWalkable() && !(entity instanceof Player)) {
+				// TODO: collision
+				this.setPieces(null);
+				world.removeDynamicEntity(this);
+				return;
+			}
+		}
+		if (this.initialCountdown == 0) {
 			return;
+		}
+		this.countdown -= delta;
+		if (this.countdown < 0) {
+			this.countdown = 0;
 		}
 		int[] initialPosition = this.initialPosition;
 		int[] finalPosition = this.finalPosition;
@@ -54,7 +81,6 @@ public class Paper extends DynamicEntity {
 		float countdown = this.countdown;
 		float i = (initialPosition[0] * countdown + finalPosition[0] * (initialCountdown - countdown)) / initialCountdown;
 		float j = (initialPosition[1] * countdown + finalPosition[1] * (initialCountdown - countdown)) / initialCountdown;
-		int[] oldPosition = this.getPosition();
 		int[] newPosition = new int[]{
 			(int) i,
 			(int) j,
@@ -68,10 +94,9 @@ public class Paper extends DynamicEntity {
 			return;
 		}
 		this.setPosition(newPosition);
-		Grid grid = this.getWorld().getGrid();
-		Piece[][] pieces = this.getPieces();
-		grid.extract(pieces, oldPosition);
-		grid.insert(pieces, newPosition);
+		if (countdown == 0) {
+			this.initialCountdown = 0;
+		}
 	}
 
 	@Override

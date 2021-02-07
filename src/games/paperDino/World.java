@@ -153,4 +153,8 @@ public class World extends BasicGameState {
 		this.dynamicEntities.add(entity);
 	}
 
+	public void removeDynamicEntity(DynamicEntity entity) {
+		this.dynamicEntities.remove(entity);
+	}
+
 }

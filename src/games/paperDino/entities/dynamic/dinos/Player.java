@@ -22,7 +22,6 @@ public class Player extends Dino {
 
 	static {
 		Player.sprite = AppLoader.loadPicture("/images/dino.png");
-		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38);
 	}
 
 	private int[] paperCounts;
@@ -101,14 +100,19 @@ public class Player extends Dino {
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38*container.getHeight()/1080);
+		
+		context.setColor(Color.black);
+		context.fillRect(640*container.getWidth()/1920, 925*container.getHeight()/1080, (1300-640)*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		context.setColor(Color.white);
+		context.fillRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		
 		for (int i=0; i<paperCounts.length ; i++) {
-			context.setColor((paperCounts[i] == paperMaxCounts[i])?Color.red:Color.black);
+			context.setColor(paperCounts[i]==paperMaxCounts[i]?Color.red:(i==color.ordinal()?Color.black:Color.white));
 			context.setFont(playerFont);
 			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
 		}
-		context.setColor(Color.red);
-		context.setLineWidth(3);
-		context.drawRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920, 112*container.getHeight()/1080);
+		
 	}
 
 }

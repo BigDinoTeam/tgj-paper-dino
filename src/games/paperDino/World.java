@@ -71,6 +71,10 @@ public class World extends BasicGameState {
 			this.setState(1);
 			game.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
+
+		for (DynamicEntity dynamicEntity : dynamicEntities) {
+			dynamicEntity.update(container,game,delta);
+		}
 	}
 
 	@Override

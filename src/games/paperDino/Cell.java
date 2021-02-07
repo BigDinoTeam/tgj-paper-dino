@@ -29,4 +29,16 @@ public class Cell {
 		this.pieces.remove(piece);
 	}
 
+	/**
+	 * @return S'il est possible de marcher sur la cellule. Il suffit d'une piece non walkable pour rendre une cellule non walkable.
+	 */
+	public boolean isWalkable(){
+		for (Piece piece : this.pieces) {
+			if (!piece.isWalkable()){
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

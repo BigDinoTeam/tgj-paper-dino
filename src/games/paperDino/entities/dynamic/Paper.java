@@ -1,5 +1,6 @@
 package games.paperDino.entities.dynamic;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 
 import games.paperDino.SpeciesColor;
@@ -16,4 +17,8 @@ public class Paper extends DynamicEntity {
 		super(world, Paper.sprite, position);
 	}
 
+	@Override
+	public int checkInput(GameContainer container, int delta) {
+		return 0; //TODO : forcer un move() vers la même direction qu'au lancé (initialisation) de Paper
+	}
 }

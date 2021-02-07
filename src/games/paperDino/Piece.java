@@ -9,6 +9,7 @@ public class Piece {
 
 	private Entity entity;
 	private int[] position;
+
 	private boolean walkable;
 
 	public Piece(Entity entity, int[] position, boolean walkable) {
@@ -30,6 +31,10 @@ public class Piece {
 		int si2 = si1 + sprite.getHeight() / size[0];
 		int sj2 = sj1 + sprite.getWidth() / size[1];
 		context.drawImage(sprite, dj1, di1, dj2, di2, sj1, si1, sj2, si2);
+	}
+
+	public boolean isWalkable() {
+		return walkable;
 	}
 
 }

@@ -1,6 +1,7 @@
 package games.paperDino.entities.dynamic.dinos;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import app.AppLoader;
@@ -12,6 +13,7 @@ import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.stationary.Building;
 import games.paperDino.entities.dynamic.Dino;
+import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.*;
 
@@ -20,6 +22,7 @@ import static java.lang.Math.*;
 public class AI extends Dino {
 
 	private static Image[] sprites;
+	public static Image bubblePacifiedSprite;
 	private int[] initialPosition;  // Centre de la zone de patrouille de l'IA
 	private int patrolRange = 2; // Nombre de cases autour de initialPosition constituant la zone à patrouiller par l'IA
 	private int[] minPositionPatrol;    // Point le plus en haut à gauche de la zone de patrouille de l'IA
@@ -34,12 +37,14 @@ public class AI extends Dino {
 			AppLoader.loadPicture("/images/t_rex/t_rex-green.png"),
 			AppLoader.loadPicture("/images/t_rex/t_rex-blue.png"),
 		};
+		AI.bubblePacifiedSprite = AppLoader.loadPicture("/images/bubbles/love_dino_bubble.png");
 	}
 
 	private Building building;
 	private SpeciesColor color;
 	private Activity activity;
 	private boolean pacified;
+
 
 	public AI(World world, int[] position, SpeciesColor color) {
 		super(world, AI.sprites[color.ordinal()], position);
@@ -54,6 +59,13 @@ public class AI extends Dino {
 		this.initialPosition = position;
 		this.minPositionPatrol = new int[] {max(this.initialPosition[0] - this.patrolRange, 0), max(this.initialPosition[1] - this.patrolRange, 0)};
 		this.minPositionPatrol = new int[] {min(this.initialPosition[0] + this.patrolRange, world.getGrid().getHeight()), max(this.initialPosition[1] + this.patrolRange, world.getGrid().getWidth())};
+	}
+
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		// Affichage de la bulle de réaction
+		if(pacified){
+
+		}
 	}
 
 	@Override

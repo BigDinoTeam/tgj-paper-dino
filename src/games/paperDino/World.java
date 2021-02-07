@@ -24,9 +24,11 @@ import games.paperDino.entities.stationary.Nest;
 public class World extends BasicGameState {
 
 	private static Image background;
+	private static Image gui;
 
 	static {
 		World.background = AppLoader.loadPicture("/images/herbe.png");
+		World.gui = AppLoader.loadPicture("/images/GUI.png");
 	}
 
 	private int ID;
@@ -91,6 +93,10 @@ public class World extends BasicGameState {
 		/* Méthode exécutée environ 60 fois par seconde */
 		context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 		this.grid.render(container, game, context);
+		
+		// GUI en dernier !
+		this.player.render(container, game, context);
+		context.drawImage(World.gui, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.gui.getWidth(), World.gui.getHeight());
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {

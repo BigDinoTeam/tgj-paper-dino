@@ -1,10 +1,13 @@
 package games.paperDino.entities.dynamic.dinos;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
 
+import app.AppFont;
 import app.AppLoader;
 
 import games.paperDino.Piece;
@@ -16,9 +19,11 @@ import games.paperDino.entities.dynamic.Paper;
 public class Player extends Dino {
 
 	private static Image sprite;
+	private static AppFont playerFont;
 
 	static {
-		Player.sprite = AppLoader.loadPicture("/images/houses/maison_orange.png");
+		Player.sprite = AppLoader.loadPicture("/images/dino.png");
+		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38);
 	}
 
 	private int[] paperCounts;
@@ -34,11 +39,18 @@ public class Player extends Dino {
 			},
 		});
 		this.paperCounts = new int[]{
-			2,
-			5,
-			5,
-			5,
-			5,
+			2, // universal
+			5, // red
+			5, // yellow
+			5, // green
+			5, // blue
+		};
+		this.paperMaxCounts = new int[]{
+			5, // universal
+			10, // red
+			10, // yellow
+			10, // green
+			10, // blue
 		};
 		this.color = SpeciesColor.universal;
 		this.score = 0;
@@ -56,6 +68,17 @@ public class Player extends Dino {
 			};
 			this.throwPaper(initialPosition, finalPosition);
 		}
+	}
+
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		for (int i=0; i<paperCounts.length ; i++) {
+			context.setColor((paperCounts[i] == paperMaxCounts[i])?Color.red:Color.black);
+			context.setFont(playerFont);
+			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
+		}
+		context.setColor(Color.red);
+		context.setLineWidth(3);
+		context.drawRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920, 112*container.getHeight()/1080);
 	}
 
 	public void collectPapers() {}

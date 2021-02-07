@@ -3,21 +3,31 @@ package games.paperDino;
 import java.util.ArrayList;
 import java.util.List;
 
-import games.paperDino.entities.StationaryEntity;
-import games.paperDino.entities.dynamic.dinos.AI;
-import games.paperDino.entities.stationary.Building;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import app.AppLoader;
+
 import games.paperDino.entities.DynamicEntity;
+import games.paperDino.entities.StationaryEntity;
+import games.paperDino.entities.dynamic.dinos.AI;
 import games.paperDino.entities.dynamic.dinos.Player;
+import games.paperDino.entities.stationary.Building;
+import games.paperDino.entities.stationary.Nest;
 
 public class World extends BasicGameState {
+
+	private static Image background;
+
+	static {
+		World.background = AppLoader.loadPicture("/images/herbe.png");
+	}
 
 	private int ID;
 	private int state;
@@ -80,6 +90,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
+		context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 		this.grid.render(container, game, context);
 	}
 
@@ -112,7 +123,7 @@ public class World extends BasicGameState {
 	 * Charge la Grid et les entitées dynamiques
 	 */
 	public void loadLevel(){
-		this.grid = new Grid(7,9); // Initialisation manuelle de la grid
+		this.grid = new Grid(5, 10); // Initialisation manuelle de la grid
 
 		this.dynamicEntities = new ArrayList<>();
 		this.stationaryEntities = new ArrayList<>();
@@ -123,8 +134,9 @@ public class World extends BasicGameState {
 		this.dynamicEntities.add(new AI(this, new int[]{1, 2})); // Ajouter un dino IA
 		this.dynamicEntities.add(new AI(this, new int[]{4, 8})); // Ajouter un dino IA
 		this.dynamicEntities.add(new AI(this, new int[]{3, 7})); // Ajouter un dino IA
-		//
-		this.stationaryEntities.add(new Building(this,0, new int[] {0, 6}));  // Ajouter une maison
+
+		this.stationaryEntities.add(new Nest(this, new int[]{4, 0})); // Ajouter le fourgon
+		this.stationaryEntities.add(new Building(this,0, new int[] {1, 6}));  // Ajouter une maison
 
 	}
 

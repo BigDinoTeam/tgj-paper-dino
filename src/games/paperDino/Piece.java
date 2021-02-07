@@ -1,5 +1,6 @@
 package games.paperDino;
 
+import games.paperDino.entities.dynamic.dinos.AI;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -31,6 +32,14 @@ public class Piece {
 		int si = this.position[0];
 		int sj = this.position[1];
 		context.drawImage(sprite, dj * cellSize, di * cellSize, (dj + 1) * cellSize, (di + 1) * cellSize, sj * clipWidth, si * clipHeight, (sj + 1) * clipWidth, (si + 1) * clipHeight);
+		if(getEntity() instanceof AI){
+			AI entityAI = (AI) getEntity();
+			if (entityAI.isPacified()){
+				int bubbleHeight = AI.bubblePacifiedSprite.getHeight();
+				int bubbleWidth = AI.bubblePacifiedSprite.getWidth();
+				context.drawImage(AI.bubblePacifiedSprite, (float) (dj * cellSize + cellSize * 0.45), di * cellSize, (dj + 1) * cellSize, (float) ((di + 0.55) * cellSize), 0, 0, bubbleWidth, bubbleHeight);
+			}
+		}
 	}
 
 	public Entity getEntity() {

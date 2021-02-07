@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import app.AppFont;
 import app.AppLoader;
 
+import games.paperDino.Cell;
 import games.paperDino.Piece;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
@@ -35,6 +36,11 @@ public class Player extends Dino {
 		this.setPieces(new Piece[][]{
 			new Piece[]{
 				new Piece(this, new int[]{0, 0}, true),
+				new Piece(this, new int[]{0, 1}, true),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{1, 0}, true),
+				new Piece(this, new int[]{1, 1}, true),
 			},
 		});
 		this.paperCounts = new int[]{
@@ -59,7 +65,7 @@ public class Player extends Dino {
 		super.update(container, game, delta);
 		Input input = container.getInput();
 		if (input.isMousePressed(0)) {
-			int cellSize = 128;
+			int cellSize = Cell.size;
 			int[] initialPosition = this.getPosition();
 			int[] finalPosition = new int[]{
 				input.getMouseY() / cellSize,
@@ -71,19 +77,19 @@ public class Player extends Dino {
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38*container.getHeight()/1080);
-		
+
 		context.setColor(Color.black);
 		context.fillRect(640*container.getWidth()/1920, 925*container.getHeight()/1080, (1300-640)*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
 		context.setColor(Color.white);
 		context.fillRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
-		
+
 		for (int i=0; i<paperCounts.length ; i++) {
 			context.setColor(paperCounts[i]==paperMaxCounts[i]?Color.red:(i==color.ordinal()?Color.black:Color.white));
 			context.setFont(playerFont);
 			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
 		}
 	}
-	
+
 	public void collectPapers() {}
 
 	public void selectPaper() {}
@@ -119,7 +125,7 @@ public class Player extends Dino {
 		} else if (input.isKeyDown(Input.KEY_5)) {
 			this.color = SpeciesColor.blue;
 		}
-		
+
 		// Déplacement ZQSD du joueur :
 		if (input.isKeyDown(Input.KEY_Z)){
 			return this.move(new int[] {-1, 0});
@@ -130,10 +136,10 @@ public class Player extends Dino {
 		} else if (input.isKeyDown(Input.KEY_Q)) {
 			return this.move(new int[] {0, -1});
 		}
-		
+
 		return 0;
 	}
-		
+
 	public void setScore(int score) {
 		this.score = score;
 	}

@@ -66,21 +66,16 @@ public class Paper extends DynamicEntity {
 			if (!piece.isWalkable() && !(entity instanceof Player)) {
 				this.setPieces(null);
 				world.removeDynamicEntity(this);
+				SpeciesColor color = null;
 				if (entity instanceof Building) {
-					AI dino = ((Building) entity).getDino();
-					Player player = world.getPlayer();
-					if (this.color == dino.getColor()) {
-						player.setScore(player.getScore() + 1);
-					}
-					return;
+					color = ((Building) entity).getColor();
+				 }
+ 				if (entity instanceof AI) {
+					color = ((AI) entity).getColor();
 				}
-				if (entity instanceof AI) {
-					AI dino = (AI) entity;
+				if (color != null && this.color == SpeciesColor.universal || this.color == color) {
 					Player player = world.getPlayer();
-					if (this.color == dino.getColor()) {
-						player.setScore(player.getScore() + 1);
-					}
-					return;
+					player.setScore(player.getScore() + 1);
 				}
 				return;
 			}

@@ -11,6 +11,11 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Cell {
 
+	public static int size;
+
+	static {
+		Cell.size = 64;
+	}
 	private List<Piece> pieces;
 
 	public Cell() {

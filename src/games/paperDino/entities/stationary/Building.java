@@ -5,6 +5,7 @@ import org.newdawn.slick.Image;
 import app.AppLoader;
 
 import games.paperDino.Piece;
+import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.StationaryEntity;
 import games.paperDino.entities.dynamic.dinos.AI;
@@ -18,13 +19,16 @@ public class Building extends StationaryEntity {
 	}
 
 	private int type;
-	private AI dino;
+	private SpeciesColor color;
 
-	public Building(World world, int type, int[] position) {
+	public Building(World world, int type, int[] position, SpeciesColor color) {
 		super(world, Building.sprite, position);
 		this.type = type;
 		this.setPieces(new Piece[][]{
 			new Piece[]{
+				new Piece(this, new int[]{0, 0}, true),
+				new Piece(this, new int[]{0, 1}, true),
+				new Piece(this, new int[]{0, 2}, true),
 				new Piece(this, new int[]{0, 0}, true),
 				new Piece(this, new int[]{0, 1}, true),
 				new Piece(this, new int[]{0, 2}, true),
@@ -33,12 +37,31 @@ public class Building extends StationaryEntity {
 				new Piece(this, new int[]{1, 0}, false),
 				new Piece(this, new int[]{1, 1}, false),
 				new Piece(this, new int[]{1, 2}, false),
+				new Piece(this, new int[]{1, 0}, false),
+				new Piece(this, new int[]{1, 1}, false),
+				new Piece(this, new int[]{1, 2}, false),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{2, 0}, false),
+				new Piece(this, new int[]{2, 1}, false),
+				new Piece(this, new int[]{2, 2}, false),
+				new Piece(this, new int[]{2, 0}, false),
+				new Piece(this, new int[]{2, 1}, false),
+				new Piece(this, new int[]{2, 2}, false),
+			},
+			new Piece[]{
+				new Piece(this, new int[]{3, 0}, false),
+				new Piece(this, new int[]{3, 1}, false),
+				new Piece(this, new int[]{3, 2}, false),
+				new Piece(this, new int[]{3, 0}, false),
+				new Piece(this, new int[]{3, 1}, false),
+				new Piece(this, new int[]{3, 2}, false),
 			},
 		});
-		this.dino = new AI(world, position);
+		this.color = color;
 	}
 
-	public AI getDino() {
-		return this.dino;
+	public SpeciesColor getColor() {
+		return this.color;
 	}
 }

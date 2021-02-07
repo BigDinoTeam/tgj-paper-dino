@@ -93,7 +93,7 @@ public class World extends BasicGameState {
 		/* Méthode exécutée environ 60 fois par seconde */
 		context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 		this.grid.render(container, game, context);
-		
+
 		// GUI en dernier !
 		this.player.render(container, game, context);
 		context.drawImage(World.gui, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.gui.getWidth(), World.gui.getHeight());
@@ -128,20 +128,20 @@ public class World extends BasicGameState {
 	 * Charge la Grid et les entitées dynamiques
 	 */
 	public void loadLevel(){
-		this.grid = new Grid(5, 10); // Initialisation manuelle de la grid
+		this.grid = new Grid(10, 20); // Initialisation manuelle de la grid
 
 		this.dynamicEntities = new ArrayList<>();
 		this.stationaryEntities = new ArrayList<>();
 
-		this.player = new Player(this, new int[]{1, 7});
+		this.player = new Player(this, new int[]{2, 14});
 
 		this.dynamicEntities.add(player); // Ajouter le joueur
-		this.dynamicEntities.add(new AI(this, new int[]{1, 2})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{4, 8})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{3, 7})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{2, 4}, SpeciesColor.red)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{8, 12}, SpeciesColor.yellow)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{6, 14}, SpeciesColor.green)); // Ajouter un dino IA
 
-		this.stationaryEntities.add(new Nest(this, new int[]{4, 0})); // Ajouter le fourgon
-		this.stationaryEntities.add(new Building(this,0, new int[] {1, 6}));  // Ajouter une maison
+		this.stationaryEntities.add(new Nest(this, new int[]{8, 0})); // Ajouter le fourgon
+		this.stationaryEntities.add(new Building(this, 0, new int[] {2, 12}, SpeciesColor.red));  // Ajouter une maison
 	}
 
 	public Grid getGrid() {
@@ -155,9 +155,9 @@ public class World extends BasicGameState {
 	public void removeDynamicEntity(DynamicEntity entity) {
 		this.dynamicEntities.remove(entity);
 	}
-	
+
 	public void renderNightScreen(GameContainer container, StateBasedGame game, Graphics context) {
-		
+
 	}
 
 	public Player getPlayer() {

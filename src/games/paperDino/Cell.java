@@ -29,7 +29,7 @@ public class Cell {
 			int otherPosition = otherEntity.getPosition()[0] + otherEntity.getSize()[0];
 			if (otherPosition > position) {
 				this.pieces.add(k, piece);
-				break;
+				return;
 			}
 		}
 		this.pieces.add(piece);

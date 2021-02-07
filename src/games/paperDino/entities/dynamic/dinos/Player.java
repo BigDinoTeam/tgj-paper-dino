@@ -83,6 +83,10 @@ public class Player extends Dino {
 			context.setFont(playerFont);
 			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
 		}
+
+		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 64*container.getHeight()/1080);
+		context.setColor(Color.white);
+		context.drawString(""+this.score, 126*container.getWidth()/1920, 22*container.getHeight()/1080);
 	}
 
 	public void collectPapers() {}

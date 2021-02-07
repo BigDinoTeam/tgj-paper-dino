@@ -82,7 +82,7 @@ public class AI extends Dino {
 				return move(moveToTest);
 			}
 		}
-		return this.getDefaultCountdown(); // Si aucun déplacement n'est possible, attendre un peu avant de retenter
+		return 300; // Si aucun déplacement n'est possible, attendre un peu avant de retenter
 	}
 
 	private boolean pointIsInPatrolRange(int[] point){

@@ -69,6 +69,7 @@ public class AI extends Dino {
 			moveToTest = movesToTest.get(i);
 			destination = addVectorToPoint(this.getPosition(), moveToTest);
 			if (pointIsInPatrolRange(destination) && grid.canMoveToCell(destination)) {
+				this.latestMove = moveToTest;
 				return move(moveToTest);
 			}
 		}

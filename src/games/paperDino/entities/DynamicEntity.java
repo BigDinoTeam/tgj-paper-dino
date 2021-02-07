@@ -1,13 +1,9 @@
 package games.paperDino.entities;
 
-import games.paperDino.Cell;
+import games.paperDino.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
-
-import games.paperDino.Entity;
-import games.paperDino.Piece;
-import games.paperDino.World;
 
 /**
  *
@@ -51,14 +47,15 @@ abstract public class DynamicEntity extends Entity {
 		newPosition[1] += direction[1];
 
 		Cell[][] cells = this.getWorld().getGrid().getCells();
+		Grid grid = this.getWorld().getGrid();
 
-		if(newPosition[0] < 0 || newPosition[0] >= cells.length || newPosition[1] < 0 || newPosition[1] >= cells[0].length || !cells[newPosition[0]][newPosition[1]].isWalkable()){
+		if(!grid.canMoveToCell(newPosition)){
 			return 0;   // Le mouvement est impossible et est donc annulé
 		}
 
 		this.setPosition(newPosition);
-		this.getWorld().getGrid().extract(this.getPieces(), oldPosition);   // Retirer l'Entity de sa Cell
-		this.getWorld().getGrid().insert(this.getPieces(), newPosition);   // Ajouter l'Entity à sa nouvelle Cell
+		grid.extract(this.getPieces(), oldPosition);   // Retirer l'Entity de sa Cell
+		grid.insert(this.getPieces(), newPosition);   // Ajouter l'Entity à sa nouvelle Cell
 		return this.defaultCountdown; //TODO : ajouter cooldown avant prochaine action
 	}
 

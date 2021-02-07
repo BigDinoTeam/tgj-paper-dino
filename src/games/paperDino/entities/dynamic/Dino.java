@@ -1,6 +1,7 @@
 package games.paperDino.entities.dynamic;
 
 import games.paperDino.Grid;
+import games.paperDino.entities.dynamic.dinos.AI;
 import org.newdawn.slick.Image;
 
 import games.paperDino.Piece;
@@ -26,7 +27,9 @@ abstract public class Dino extends DynamicEntity {
 		if (grid.cellExists(newPosition)) {
 			dinoOnNewPositionCell = grid.getCell(newPosition).whoIsOnThisCell();
 			if (dinoOnNewPositionCell != null && !dinoOnNewPositionCell.getClass().equals(this.getClass())) {  // S'il y a un dino sur la cellule newPosition et qu'il est de type différent cela signifie qu'un IA entre en colision avec le joueur
-				this.getWorld().killPlayer();
+				if(!dinoOnNewPositionCell.isPacified() || !this.isPacified()){ // Si l'IA bougeant n'est pas pacifiée, tuer le joueur.
+					this.getWorld().killPlayer();
+				}
 			}
 		}
 
@@ -37,4 +40,6 @@ abstract public class Dino extends DynamicEntity {
 		this.setPosition(newPosition);
 		return this.getDefaultCountdown(); //TODO : ajouter cooldown avant prochaine action
 	}
+
+	abstract public boolean isPacified();
 }

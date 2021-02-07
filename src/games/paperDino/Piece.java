@@ -37,7 +37,7 @@ public class Piece {
 			if (entityAI.isPacified()){
 				int bubbleHeight = AI.bubblePacifiedSprite.getHeight();
 				int bubbleWidth = AI.bubblePacifiedSprite.getWidth();
-				context.drawImage(AI.bubblePacifiedSprite, (float) (dj * cellSize + cellSize * 0.45), di * cellSize, (dj + 1) * cellSize, (float) ((di + 0.55) * cellSize), 0, 0, bubbleWidth, bubbleHeight);
+				context.drawImage(AI.bubblePacifiedSprite, (dj + 0.5f) * cellSize, (di - 0.5f) * cellSize, (dj + 1.5f) * cellSize, (di + 0.5f) * cellSize, 0, 0, bubbleWidth, bubbleHeight); // dépasse un peu en haut et à gauche de la pièce (pour être visible)
 			}
 		}
 	}

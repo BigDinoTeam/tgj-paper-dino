@@ -180,4 +180,10 @@ public class World extends BasicGameState {
 		this.night = new Night(this.player.getScore(), true);
 		System.out.println("Collision avec le joueur ! Day over");
 	}
+	
+	public void endDay(){
+		this.isDay = false;
+		this.night = new Night(this.player.getScore(), false);
+		System.out.println("Day over");
+	}
 }

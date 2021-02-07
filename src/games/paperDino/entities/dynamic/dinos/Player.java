@@ -68,6 +68,13 @@ public class Player extends Dino {
 			};
 			this.throwPaper(initialPosition, finalPosition);
 		}
+		int sum = 0;
+		for (int n: paperCounts) {
+			sum += n;
+		}
+		if (sum == 0) {
+			this.getWorld().endDay();
+		}
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {

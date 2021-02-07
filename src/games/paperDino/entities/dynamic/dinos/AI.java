@@ -100,4 +100,9 @@ public class AI extends Dino {
 	public boolean isPacified() {
 		return pacified;
 	}
+
+	public void pacify(){
+		this.pacified = true;
+		//TODO : ajouter bulle de réaction
+	}
 }

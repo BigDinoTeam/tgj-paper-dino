@@ -87,8 +87,6 @@ public class Player extends Dino {
 
 	public void collectPapers() {}
 
-	public void selectPaper() {}
-
 	public void throwPaper(int[] initialPosition, int[] finalPosition) {
 		if (initialPosition[0] == finalPosition[0] && initialPosition[1] == finalPosition[1]) {
 			return;

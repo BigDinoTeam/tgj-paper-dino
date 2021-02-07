@@ -75,7 +75,8 @@ public class Paper extends DynamicEntity {
 				}
 				if (color != null && this.color == SpeciesColor.universal || this.color == color) { // Collision sur AI avec bonne couleur
 					Player player = world.getPlayer();
-					player.setScore(player.getScore() + 1); //TODO : collision sur AI
+					player.setScore(player.getScore() + 1);
+					((AI) entity).pacify();
 				}
 				return; // TODO : appeler collision (maison ou AI)
 			}

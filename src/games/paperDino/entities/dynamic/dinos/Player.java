@@ -143,4 +143,8 @@ public class Player extends Dino {
 		return this.score;
 	}
 
+	public boolean isPacified() { // Le joueur est toujours "ami"
+		return true;
+	}
+
 }

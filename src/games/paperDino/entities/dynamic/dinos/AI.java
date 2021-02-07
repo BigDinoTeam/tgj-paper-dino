@@ -97,4 +97,7 @@ public class AI extends Dino {
 		return this.color;
 	}
 
+	public boolean isPacified() {
+		return pacified;
+	}
 }

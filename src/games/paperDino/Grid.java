@@ -76,7 +76,7 @@ public class Grid {
 	 * @return
 	 */
 	public boolean canMoveToCell(int[] position){
-		int i = position[0] + 1;
+		int i = position[0];
 		int j = position[1];
 		if(!cellExists(position) || !cells[i][j].isWalkable()){
 			return false;

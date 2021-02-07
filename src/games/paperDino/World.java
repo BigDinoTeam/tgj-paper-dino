@@ -128,20 +128,20 @@ public class World extends BasicGameState {
 	 * Charge la Grid et les entitées dynamiques
 	 */
 	public void loadLevel(){
-		this.grid = new Grid(10, 20); // Initialisation manuelle de la grid
+		this.grid = new Grid(9, 16); // Initialisation manuelle de la grid
 
 		this.dynamicEntities = new ArrayList<>();
 		this.stationaryEntities = new ArrayList<>();
 
-		this.player = new Player(this, new int[]{2, 14});
+		this.player = new Player(this, new int[]{1, 7});
 
 		this.dynamicEntities.add(player); // Ajouter le joueur
-		this.dynamicEntities.add(new AI(this, new int[]{2, 4}, SpeciesColor.red)); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{8, 12}, SpeciesColor.yellow)); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{6, 14}, SpeciesColor.green)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{1, 2}, SpeciesColor.red)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{4, 6}, SpeciesColor.yellow)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{3, 7}, SpeciesColor.green)); // Ajouter un dino IA
 
-		this.stationaryEntities.add(new Nest(this, new int[]{8, 0})); // Ajouter le fourgon
-		this.stationaryEntities.add(new Building(this, 0, new int[] {2, 12}, SpeciesColor.red));  // Ajouter une maison
+		this.stationaryEntities.add(new Nest(this, new int[]{7, 0})); // Ajouter le fourgon
+		this.stationaryEntities.add(new Building(this, 0, new int[] {1, 6}, SpeciesColor.red));  // Ajouter une maison
 	}
 
 	public Grid getGrid() {

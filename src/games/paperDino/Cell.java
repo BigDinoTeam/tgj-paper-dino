@@ -14,7 +14,7 @@ public class Cell {
 	public static int size;
 
 	static {
-		Cell.size = 64;
+		Cell.size = 80;
 	}
 	private List<Piece> pieces;
 

@@ -36,13 +36,14 @@ public class AI extends Dino {
 	private Activity activity;
 	private boolean pacified;
 
-	public AI(World world, int[] position) {
+	public AI(World world, int[] position, SpeciesColor color) {
 		super(world, AI.sprite, position);
 		this.setPieces(new Piece[][]{
 			new Piece[]{
 				new Piece(this, new int[]{0, 0}, false),
 			},
 		});
+		this.color = color;
 		// Variables de zone de patrouille :
 		this.latestMove = new int[] {-1, 0};
 		this.initialPosition = position;

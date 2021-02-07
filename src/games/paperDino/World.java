@@ -93,7 +93,7 @@ public class World extends BasicGameState {
 		/* Méthode exécutée environ 60 fois par seconde */
 		context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 		this.grid.render(container, game, context);
-		
+
 		// GUI en dernier !
 		this.player.render(container, game, context);
 		context.drawImage(World.gui, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.gui.getWidth(), World.gui.getHeight());
@@ -136,12 +136,12 @@ public class World extends BasicGameState {
 		this.player = new Player(this, new int[]{1, 7});
 
 		this.dynamicEntities.add(player); // Ajouter le joueur
-		this.dynamicEntities.add(new AI(this, new int[]{1, 2})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{4, 8})); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{3, 7})); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{1, 2}, SpeciesColor.red)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{4, 8}, SpeciesColor.yellow)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{3, 7}, SpeciesColor.green)); // Ajouter un dino IA
 
 		this.stationaryEntities.add(new Nest(this, new int[]{4, 0})); // Ajouter le fourgon
-		this.stationaryEntities.add(new Building(this,0, new int[] {1, 6}));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this,0, new int[] {1, 6}, SpeciesColor.red));  // Ajouter une maison
 	}
 
 	public Grid getGrid() {

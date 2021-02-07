@@ -5,6 +5,7 @@ import org.newdawn.slick.Image;
 import app.AppLoader;
 
 import games.paperDino.Piece;
+import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.StationaryEntity;
 import games.paperDino.entities.dynamic.dinos.AI;
@@ -18,9 +19,9 @@ public class Building extends StationaryEntity {
 	}
 
 	private int type;
-	private AI dino;
+	private SpeciesColor color;
 
-	public Building(World world, int type, int[] position) {
+	public Building(World world, int type, int[] position, SpeciesColor color) {
 		super(world, Building.sprite, position);
 		this.type = type;
 		this.setPieces(new Piece[][]{
@@ -35,10 +36,10 @@ public class Building extends StationaryEntity {
 				new Piece(this, new int[]{1, 2}, false),
 			},
 		});
-		this.dino = new AI(world, position);
+		this.color = color;
 	}
 
-	public AI getDino() {
-		return this.dino;
+	public SpeciesColor getColor() {
+		return this.color;
 	}
 }

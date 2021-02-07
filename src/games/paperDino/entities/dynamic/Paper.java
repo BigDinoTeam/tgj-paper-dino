@@ -14,11 +14,17 @@ import games.paperDino.entities.DynamicEntity;
 
 public class Paper extends DynamicEntity {
 
-	private static Image sprite;
+	private static Image[] sprites;
 	private static float speed;
 
 	static {
-		Paper.sprite = AppLoader.loadPicture("/images/houses/maison_vert.png");
+		Paper.sprites = new Image[]{
+			AppLoader.loadPicture("/images/prospectus/prospectus-universal.png"),
+			AppLoader.loadPicture("/images/prospectus/prospectus-red.png"),
+			AppLoader.loadPicture("/images/prospectus/prospectus-yellow.png"),
+			AppLoader.loadPicture("/images/prospectus/prospectus-green.png"),
+			AppLoader.loadPicture("/images/prospectus/prospectus-blue.png"),
+		};
 		Paper.speed = 5;
 	}
 
@@ -28,8 +34,9 @@ public class Paper extends DynamicEntity {
 	private float initialCountdown;
 	private float countdown;
 
-	public Paper(World world, int[] initialPosition, int[] finalPosition) {
-		super(world, Paper.sprite, initialPosition);
+	public Paper(World world, SpeciesColor color, int[] initialPosition, int[] finalPosition) {
+		super(world, Paper.sprites[color.ordinal()], initialPosition);
+		this.color = color;
 		this.initialPosition = initialPosition;
 		this.finalPosition = finalPosition;
 		float distance = (float) Math.sqrt(Math.pow(finalPosition[0] - initialPosition[0], 2) + Math.pow(finalPosition[1] - initialPosition[1], 2));

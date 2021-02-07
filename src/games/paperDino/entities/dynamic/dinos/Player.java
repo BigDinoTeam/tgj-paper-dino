@@ -22,15 +22,18 @@ public class Player extends Dino {
 
 	private int[] paperCounts;
 	private int[] paperMaxCounts;
-	private SpeciesColor selectedPaper;
+	private SpeciesColor color;
 
 	public Player(World world, int[] position) {
 		super(world, Player.sprite, position);
 		this.paperCounts = new int[]{
-			4,
-			3,
+			2,
+			5,
+			5,
+			5,
+			5,
 		};
-		this.selectedPaper = SpeciesColor.red;
+		this.color = SpeciesColor.universal;
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -54,13 +57,14 @@ public class Player extends Dino {
 		if (initialPosition[0] == finalPosition[0] && initialPosition[1] == finalPosition[1]) {
 			return;
 		}
-		int selectedPaper = this.selectedPaper.ordinal();
-		if (this.paperCounts[selectedPaper] == 0) {
+		SpeciesColor color = this.color;
+		int colorOrdinal = color.ordinal();
+		if (this.paperCounts[colorOrdinal] == 0) {
 			return;
 		}
-		--this.paperCounts[selectedPaper];
+		--this.paperCounts[colorOrdinal];
 		World world = this.getWorld();
-		world.addDynamicEntity(new Paper(world, initialPosition, finalPosition));
+		world.addDynamicEntity(new Paper(world, color, initialPosition, finalPosition));
 	}
 
 	public void punchWithPaper() {}

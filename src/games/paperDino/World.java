@@ -164,4 +164,7 @@ public class World extends BasicGameState {
 		return this.player;
 	}
 
+	public void killPlayer(){
+		System.out.println("Collision avec le joueur ! Day over");
+	}
 }

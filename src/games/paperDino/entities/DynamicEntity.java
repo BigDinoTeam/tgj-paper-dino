@@ -28,32 +28,9 @@ abstract public class DynamicEntity extends Entity {
 		}
 	}
 
-	/**
-	 * Déplace l'entité vers une case en fonction du vecteur direction
-	 * @param direction vecteur direction (i,j)
-	 * return time before next move (in miliseconds)
-	 */
-	public int move(int[] direction) {
-
-
-		int[] newPosition = this.getPosition();
-		newPosition[0] += direction[0];
-		newPosition[1] += direction[1];
-
-		Grid grid = this.getWorld().getGrid();
-
-		if(!grid.canMoveToCell(newPosition)){
-			return 0;   // Le mouvement est impossible et est donc annulé
-		}
-
-		this.setPosition(newPosition);
-		return this.defaultCountdown; //TODO : ajouter cooldown avant prochaine action
-	}
-
 	abstract public int checkInput(GameContainer container, int delta);
 
 	public int getDefaultCountdown() {
 		return defaultCountdown;
 	}
-
 }

@@ -61,4 +61,25 @@ public class Grid {
 	public Cell[][] getCells() {
 		return cells;
 	}
+
+	public int getHeight(){
+		return cells.length;
+	}
+
+	public int getWidth(){
+		return cells[0].length;
+	}
+
+	/** Indique s'il est possible de se déplacer vers la cellule de coordonnées (i, j)
+	 * @param position
+	 * @return
+	 */
+	public boolean canMoveToCell(int[] position){
+		int i = position[0];
+		int j = position[1];
+		if(i < 0 || i >= this.getHeight() || j < 0 || j >= this.getWidth() || !cells[i][j].isWalkable()){
+			return false;
+		}
+		return true;
+	}
 }

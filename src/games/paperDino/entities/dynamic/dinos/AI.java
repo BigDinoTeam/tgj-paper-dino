@@ -1,19 +1,27 @@
 package games.paperDino.entities.dynamic.dinos;
 
+import games.paperDino.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 
 import app.AppLoader;
 
-import games.paperDino.Activity;
-import games.paperDino.SpeciesColor;
-import games.paperDino.World;
 import games.paperDino.entities.stationary.Building;
 import games.paperDino.entities.dynamic.Dino;
+
+import java.util.*;
+
+import static java.lang.Math.*;
 
 public class AI extends Dino {
 
 	private static Image sprite;
+	private int[] initialPosition;  // Centre de la zone de patrouille de l'IA
+	private int patrolRange = 2; // Nombre de cases autour de initialPosition constituant la zone à patrouiller par l'IA
+	private int[] minPositionPatrol;    // Point le plus en haut à gauche de la zone de patrouille de l'IA
+	private int[] maxPositionPatrol;    // Point le plus en bas à droite de la zone de patrouille de l'IA
+	private int[] latestMove; // Vecteur du dernier déplacement réalisé
+
 
 	static {
 		AI.sprite = AppLoader.loadPicture("/images/houses/maison_jaune.png");
@@ -26,10 +34,52 @@ public class AI extends Dino {
 
 	public AI(World world, int[] position) {
 		super(world, AI.sprite, position);
+
+		// Variables de zone de patrouille :
+		this.latestMove = new int[] {-1, 0};
+		this.initialPosition = position;
+		this.minPositionPatrol = new int[] {max(this.initialPosition[0] - this.patrolRange, 0), max(this.initialPosition[1] - this.patrolRange, 0)};
+		this.minPositionPatrol = new int[] {min(this.initialPosition[0] + this.patrolRange, world.getGrid().getHeight()), max(this.initialPosition[1] + this.patrolRange, world.getGrid().getWidth())};
 	}
 
 	@Override
 	public int checkInput(GameContainer container, int delta) {
-		return 0; //TODO : faire des move() en fonction de l'activity de l'AI et de la position du joueur
+		// Si l'IA peut continuer tout droit sans sortir de sa zone de patrouille, il le fait. Il détermine son orientation actuelle grâce à latestMove
+		// Sinon, il choisit aléatoirement entre prendre à gauche, à droite, voire faire demi-tour (avec le moins de probabilité)
+		Random random = new Random();
+		int randomNumber = random.nextInt(10);
+
+		Grid grid = this.getWorld().getGrid();
+		int[] moveToTest;
+		int[] destination;
+
+		List<int[]> movesToTest = new ArrayList<>();
+		movesToTest.add(new int[] {-1,0});
+		movesToTest.add(new int[] {0, 1});
+		movesToTest.add(new int[] { 1, 0});
+		movesToTest.add(new int[] {0, -1});
+
+		Collections.shuffle(movesToTest, random); // Mélange la liste de déplacement possibles
+
+		// Ensure that the lastestMove is at the end of the list
+		movesToTest.remove(latestMove);
+		movesToTest.add(latestMove);
+
+		for (int i = movesToTest.size() - 1 ; i > 0 ; i--) {
+			moveToTest = movesToTest.get(i);
+			destination = addVectorToPoint(this.getPosition(), moveToTest);
+			if (pointIsInPatrolRange(destination) && grid.canMoveToCell(destination)) {
+				return move(moveToTest);
+			}
+		}
+		return this.getDefaultCountdown(); // Si aucun déplacement n'est possible, attendre un peu avant de retenter
+	}
+
+	private boolean pointIsInPatrolRange(int[] point){
+		return abs(point[0] - this.initialPosition[0]) <= this.patrolRange && abs(point[1] - this.initialPosition[1]) <= this.patrolRange;
+	}
+
+	private int[] addVectorToPoint(int[] point, int[] vector){
+		return new int[] {point[0] + vector[0], point[1] + vector[1]};
 	}
 }

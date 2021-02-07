@@ -17,6 +17,7 @@ abstract public class DynamicEntity extends Entity {
 	protected int actionCountdown;
 	protected boolean inAction;
 	private int initialActionCountdown; // Durée max de l'action quand on se déplace
+
 	private int defaultCountdown = 300; // Durée d'un déplacement par défaut
 
 	public DynamicEntity(World world, Image sprite, int[] position) {
@@ -62,5 +63,9 @@ abstract public class DynamicEntity extends Entity {
 	}
 
 	abstract public int checkInput(GameContainer container, int delta);
+
+	public int getDefaultCountdown() {
+		return defaultCountdown;
+	}
 
 }

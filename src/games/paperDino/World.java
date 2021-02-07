@@ -99,11 +99,11 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		
+
 		if (isDay) {
 			context.drawImage(World.background, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.background.getWidth(), World.background.getHeight());
 			this.grid.render(container, game, context);
-			
+
 			// GUI en dernier !
 			this.player.render(container, game, context);
 			context.drawImage(World.gui, 0, 0, container.getWidth(), container.getHeight(), 0, 0, World.gui.getWidth(), World.gui.getHeight());
@@ -142,21 +142,29 @@ public class World extends BasicGameState {
 	 */
 	public void loadLevel(){
 		this.isDay = true;
-		
+
 		this.grid = new Grid(9, 16); // Initialisation manuelle de la grid
 
 		this.dynamicEntities = new ArrayList<>();
 		this.stationaryEntities = new ArrayList<>();
 
-		this.player = new Player(this, new int[]{1, 7});
+		this.player = new Player(this, new int[]{7, 2});
 
 		this.dynamicEntities.add(player); // Ajouter le joueur
 		this.dynamicEntities.add(new AI(this, new int[]{1, 2}, SpeciesColor.red)); // Ajouter un dino IA
 		this.dynamicEntities.add(new AI(this, new int[]{4, 6}, SpeciesColor.yellow)); // Ajouter un dino IA
-		this.dynamicEntities.add(new AI(this, new int[]{3, 7}, SpeciesColor.green)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{8, 15}, SpeciesColor.green)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{3, 7}, SpeciesColor.blue)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{5, 2}, SpeciesColor.red)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{5, 11}, SpeciesColor.yellow)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{6, 12}, SpeciesColor.green)); // Ajouter un dino IA
+		this.dynamicEntities.add(new AI(this, new int[]{0, 15}, SpeciesColor.blue)); // Ajouter un dino IA
 
 		this.stationaryEntities.add(new Nest(this, new int[]{7, 0})); // Ajouter le fourgon
-		this.stationaryEntities.add(new Building(this, 0, new int[] {1, 6}, SpeciesColor.red));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this, 0, new int[] {1, 10}, SpeciesColor.red));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this, 0, new int[] {1, 1}, SpeciesColor.yellow));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this, 0, new int[] {5, 13}, SpeciesColor.green));  // Ajouter une maison
+		this.stationaryEntities.add(new Building(this, 0, new int[] {4, 5}, SpeciesColor.blue));  // Ajouter une maison
 	}
 
 	public Grid getGrid() {
@@ -179,5 +187,11 @@ public class World extends BasicGameState {
 		this.isDay = false;
 		this.night = new Night(this.player.getScore(), true);
 		System.out.println("Collision avec le joueur ! Day over");
+	}
+	
+	public void endDay(){
+		this.isDay = false;
+		this.night = new Night(this.player.getScore(), false);
+		System.out.println("Day over");
 	}
 }

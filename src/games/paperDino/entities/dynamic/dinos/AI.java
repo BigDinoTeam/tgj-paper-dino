@@ -21,16 +21,22 @@ import static java.lang.Math.*;
 
 public class AI extends Dino {
 
-	private static Image sprite;
+	private static Image[] sprites;
+	public static Image bubblePacifiedSprite;
 	private int[] initialPosition;  // Centre de la zone de patrouille de l'IA
 	private int patrolRange = 2; // Nombre de cases autour de initialPosition constituant la zone à patrouiller par l'IA
 	private int[] minPositionPatrol;    // Point le plus en haut à gauche de la zone de patrouille de l'IA
 	private int[] maxPositionPatrol;    // Point le plus en bas à droite de la zone de patrouille de l'IA
 	private int[] latestMove; // Vecteur du dernier déplacement réalisé
-	public static Image bubblePacifiedSprite;
 
 	static {
-		AI.sprite = AppLoader.loadPicture("/images/t_rex/t_rex-red.png");
+		AI.sprites = new Image[]{
+			AppLoader.loadPicture(null),
+			AppLoader.loadPicture("/images/t_rex/t_rex-red.png"),
+			AppLoader.loadPicture("/images/t_rex/t_rex-yellow.png"),
+			AppLoader.loadPicture("/images/t_rex/t_rex-green.png"),
+			AppLoader.loadPicture("/images/t_rex/t_rex-blue.png"),
+		};
 		AI.bubblePacifiedSprite = AppLoader.loadPicture("/images/bubbles/love_dino_bubble.png");
 	}
 
@@ -41,7 +47,7 @@ public class AI extends Dino {
 
 
 	public AI(World world, int[] position, SpeciesColor color) {
-		super(world, AI.sprite, position);
+		super(world, AI.sprites[color.ordinal()], position);
 		this.setPieces(new Piece[][]{
 			new Piece[]{
 				new Piece(this, new int[]{0, 0}, false),

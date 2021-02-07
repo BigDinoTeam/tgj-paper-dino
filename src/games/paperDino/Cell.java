@@ -51,4 +51,8 @@ public class Cell {
 		return true;
 	}
 
+	public List<Piece> getPieces() {
+		return this.pieces;
+	}
+
 }

@@ -7,6 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 abstract public class Entity {
 
 	private World world;
+
 	private Image sprite;
 	private Piece[][] pieces;
 	private int[] position;
@@ -39,10 +40,18 @@ abstract public class Entity {
 		return new int[]{i, j};
 	}
 
+	public void setPosition(int[] position) {
+		this.position = position;
+	}
+
 	public int[] getSize() {
 		int li = this.pieces.length;
 		int lj = this.pieces[0].length;
 		return new int[]{li, lj};
+	}
+
+	public World getWorld() {
+		return world;
 	}
 
 }

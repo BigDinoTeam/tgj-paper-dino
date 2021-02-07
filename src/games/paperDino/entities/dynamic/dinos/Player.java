@@ -107,6 +107,19 @@ public class Player extends Dino {
 	public int checkInput(GameContainer container, int delta){
 		Input input = container.getInput();
 
+		// Sélection des prospectus
+		if (input.isKeyDown(Input.KEY_1)){
+			this.color = SpeciesColor.universal;
+		} else if (input.isKeyDown(Input.KEY_2)) {
+			this.color = SpeciesColor.red;
+		} else if (input.isKeyDown(Input.KEY_3)) {
+			this.color = SpeciesColor.yellow;
+		} else if (input.isKeyDown(Input.KEY_4)) {
+			this.color = SpeciesColor.green;
+		} else if (input.isKeyDown(Input.KEY_5)) {
+			this.color = SpeciesColor.blue;
+		}
+		
 		// Déplacement ZQSD du joueur :
 		if (input.isKeyDown(Input.KEY_Z)){
 			return this.move(new int[] {-1, 0});
@@ -116,10 +129,9 @@ public class Player extends Dino {
 			return this.move(new int[] {1, 0});
 		} else if (input.isKeyDown(Input.KEY_Q)) {
 			return this.move(new int[] {0, -1});
-		} else {
-			return 0;
 		}
-
+		
+		return 0;
 	}
 		
 	public void setScore(int score) {

@@ -1,5 +1,6 @@
 package games.paperDino.entities.dynamic.dinos;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 
 import app.AppLoader;
@@ -27,4 +28,8 @@ public class AI extends Dino {
 		super(world, AI.sprite, position);
 	}
 
+	@Override
+	public int checkInput(GameContainer container, int delta) {
+		return 0; //TODO : faire des move() en fonction de l'activity de l'AI et de la position du joueur
+	}
 }

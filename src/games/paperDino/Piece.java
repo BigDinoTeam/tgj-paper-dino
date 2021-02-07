@@ -9,6 +9,7 @@ public class Piece {
 
 	private Entity entity;
 	private int[] position;
+
 	private boolean walkable;
 
 	public Piece(Entity entity, int[] position, boolean walkable) {
@@ -34,6 +35,10 @@ public class Piece {
 
 	public Entity getEntity() {
 		return this.entity;
+	}
+
+	public boolean isWalkable() {
+		return walkable;
 	}
 
 }

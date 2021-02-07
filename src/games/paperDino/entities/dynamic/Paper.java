@@ -67,4 +67,8 @@ public class Paper extends DynamicEntity {
 		grid.insert(pieces, newPosition);
 	}
 
+	@Override
+	public int checkInput(GameContainer container, int delta) {
+		return 0; //TODO : forcer un move() vers la même direction qu'au lancé (initialisation) de Paper
+	}
 }

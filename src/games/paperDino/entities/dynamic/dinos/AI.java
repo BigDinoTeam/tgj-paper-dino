@@ -40,8 +40,8 @@ public class AI extends Dino {
 		super(world, AI.sprite, position);
 		this.setPieces(new Piece[][]{
 			new Piece[]{
-				new Piece(this, new int[]{0, 0}, false),
-				new Piece(this, new int[]{0, 1}, false),
+				new Piece(this, new int[]{0, 0}, true),
+				new Piece(this, new int[]{0, 1}, true),
 			},
 			new Piece[]{
 				new Piece(this, new int[]{1, 0}, false),

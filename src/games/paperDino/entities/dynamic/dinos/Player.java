@@ -10,9 +10,6 @@ import app.AppLoader;
 import games.paperDino.SpeciesColor;
 import games.paperDino.World;
 import games.paperDino.entities.dynamic.Dino;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.state.StateBasedGame;
 import games.paperDino.entities.dynamic.Paper;
 
 public class Player extends Dino {
@@ -40,6 +37,7 @@ public class Player extends Dino {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
+		super.update(container, game, delta);
 		Input input = container.getInput();
 		if (input.isMousePressed(0)) {
 			int cellSize = 128;

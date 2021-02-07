@@ -23,7 +23,6 @@ public class Player extends Dino {
 
 	static {
 		Player.sprite = AppLoader.loadPicture("/images/dino.png");
-		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38);
 	}
 
 	private int[] paperCounts;
@@ -71,16 +70,20 @@ public class Player extends Dino {
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		Player.playerFont = AppLoader.loadFont("/fonts/vt323.ttf", AppFont.PLAIN, 38*container.getHeight()/1080);
+		
+		context.setColor(Color.black);
+		context.fillRect(640*container.getWidth()/1920, 925*container.getHeight()/1080, (1300-640)*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		context.setColor(Color.white);
+		context.fillRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920+2, 112*container.getHeight()/1080+2);
+		
 		for (int i=0; i<paperCounts.length ; i++) {
-			context.setColor((paperCounts[i] == paperMaxCounts[i])?Color.red:Color.black);
+			context.setColor(paperCounts[i]==paperMaxCounts[i]?Color.red:(i==color.ordinal()?Color.black:Color.white));
 			context.setFont(playerFont);
 			context.drawString(""+paperCounts[i] , (711+132*i)*container.getWidth()/1920, 995*container.getHeight()/1080);
 		}
-		context.setColor(Color.red);
-		context.setLineWidth(3);
-		context.drawRect((640+color.ordinal()*132)*container.getWidth()/1920, 925*container.getHeight()/1080, 112*container.getWidth()/1920, 112*container.getHeight()/1080);
 	}
-
+	
 	public void collectPapers() {}
 
 	public void selectPaper() {}
@@ -104,6 +107,19 @@ public class Player extends Dino {
 	public int checkInput(GameContainer container, int delta){
 		Input input = container.getInput();
 
+		// Sélection des prospectus
+		if (input.isKeyDown(Input.KEY_1)){
+			this.color = SpeciesColor.universal;
+		} else if (input.isKeyDown(Input.KEY_2)) {
+			this.color = SpeciesColor.red;
+		} else if (input.isKeyDown(Input.KEY_3)) {
+			this.color = SpeciesColor.yellow;
+		} else if (input.isKeyDown(Input.KEY_4)) {
+			this.color = SpeciesColor.green;
+		} else if (input.isKeyDown(Input.KEY_5)) {
+			this.color = SpeciesColor.blue;
+		}
+		
 		// Déplacement ZQSD du joueur :
 		if (input.isKeyDown(Input.KEY_Z)){
 			return this.move(new int[] {-1, 0});
@@ -113,12 +129,11 @@ public class Player extends Dino {
 			return this.move(new int[] {1, 0});
 		} else if (input.isKeyDown(Input.KEY_Q)) {
 			return this.move(new int[] {0, -1});
-		} else {
-			return 0;
 		}
-
+		
+		return 0;
 	}
-
+		
 	public void setScore(int score) {
 		this.score = score;
 	}

@@ -155,6 +155,10 @@ public class World extends BasicGameState {
 	public void removeDynamicEntity(DynamicEntity entity) {
 		this.dynamicEntities.remove(entity);
 	}
+	
+	public void renderNightScreen(GameContainer container, StateBasedGame game, Graphics context) {
+		
+	}
 
 	public Player getPlayer() {
 		return this.player;

@@ -1,5 +1,6 @@
 package games.paperDino;
 
+import games.paperDino.entities.dynamic.Dino;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
@@ -77,9 +78,27 @@ public class Grid {
 	public boolean canMoveToCell(int[] position){
 		int i = position[0];
 		int j = position[1];
-		if(i < 0 || i >= this.getHeight() || j < 0 || j >= this.getWidth() || !cells[i][j].isWalkable()){
+		if(!cellExists(position) || !cells[i][j].isWalkable()){
 			return false;
 		}
 		return true;
+	}
+
+
+	/**
+	 * @param position
+	 * @return si la cellule existe (si la position n'est pas hors de Grid)
+	 */
+	public boolean cellExists(int [] position){
+		int i = position[0];
+		int j = position[1];
+		if(i < 0 || i >= this.getHeight() || j < 0 || j >= this.getWidth()){
+			return false;
+		}
+		return true;
+	}
+
+	public Cell getCell(int[] position){
+		return cells[position[0]][position[1]];
 	}
 }

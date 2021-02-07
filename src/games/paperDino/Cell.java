@@ -3,6 +3,8 @@ package games.paperDino;
 import java.util.ArrayList;
 import java.util.List;
 
+import games.paperDino.entities.StationaryEntity;
+import games.paperDino.entities.dynamic.Dino;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
@@ -56,8 +58,34 @@ public class Cell {
 		return true;
 	}
 
+	/**
+	 * @return S'il est possible de marcher sur la cellule. Il suffit d'une piece non walkable pour rendre une cellule non walkable.
+	 */
+	public boolean isWalkable(Dino dino){
+		for (Piece piece : this.pieces) {
+			if (!piece.isWalkable()){
+				if(piece.getEntity() instanceof StationaryEntity || piece.getEntity().getClass().equals(dino.getClass())){ // Si l'obstacle est statique ou de même type que le dino voulant faire le déplacement, on ne peut pas marcher dessus
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	public List<Piece> getPieces() {
 		return this.pieces;
+	}
+
+	/**
+	 * @return le premier Dino trouvé sur cette Cell
+	 */
+	public Dino whoIsOnThisCell(){
+		for (Piece piece : this.pieces) {
+			if (piece.getEntity() instanceof Dino){
+				return (Dino) piece.getEntity();
+			}
+		}
+		return null;
 	}
 
 }
